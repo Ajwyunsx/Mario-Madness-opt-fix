@@ -136,8 +136,8 @@
 	"no_antialiasing": false,
 	"image": "characters/Mario_LDO",
 	"position": [
-		-30,
-		150
+		200,
+		360
 	],
 	"healthicon": "mario-ldo",
 	"flip_x": false,
@@ -147,9 +147,9 @@
 		44
 	],
 	"camera_position": [
-		-100,
-		-20
+		-500,
+		-270
 	],
 	"sing_duration": 4,
-	"scale": 1
+	"scale": 3.5
 }

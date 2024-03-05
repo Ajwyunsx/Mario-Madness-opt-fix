@@ -1,154 +1,154 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				2,
 				0
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf idle",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "goombf idle"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				54,
 				13
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf left",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "goombf left"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				13,
 				-31
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf down",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "goombf down"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-23,
 				57
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf up",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "goombf up"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-23,
 				16
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf right",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "goombf right"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				38,
 				53
 			],
-			"anim": "singLEFTmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf miss left",
-			"indices": []
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "goombf miss left"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				12,
 				14
 			],
-			"anim": "singDOWNmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf miss down",
-			"indices": []
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "goombf miss down"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-15,
 				52
 			],
-			"anim": "singUPmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf miss up",
-			"indices": []
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "goombf miss up"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-25,
 				46
 			],
-			"anim": "singRIGHTmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf miss right",
-			"indices": []
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "goombf miss right"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				28,
 				193
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "firstDeath",
-			"fps": 24,
-			"name": "goombf dead animation",
-			"indices": []
+			"indices": [],
+			"name": "goombf dead animation"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				440,
 				170
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "deathLoop",
-			"fps": 24,
-			"name": "goombf dead loop",
-			"indices": []
+			"indices": [],
+			"name": "goombf dead loop"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				440,
 				170
 			],
-			"anim": "deathConfirm",
+			"loop": false,
 			"fps": 24,
-			"name": "goombf dead confirm",
-			"indices": []
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "goombf dead confirm"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-15,
 				30
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "dodge",
-			"loop": false,
-			"name": "goombf dodge"
+			"fps": 24,
+			"name": "goombf dodge",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/BF_Goomba",
 	"position": [
-		10,
-		430
+		500,
+		670
 	],
 	"healthicon": "gbf",
 	"flip_x": true,
@@ -158,9 +158,9 @@
 		209
 	],
 	"camera_position": [
-		20,
-		-30
+		950,
+		-400
 	],
 	"sing_duration": 4,
-	"scale": 1.1
+	"scale": 4.1
 }
