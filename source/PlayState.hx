@@ -3278,22 +3278,22 @@ class PlayState extends MusicBeatState
                                 noCount = true;
 				noHUD = true;
 
-				var fartree:BGSprite = new BGSprite('mario/Turmoil/ThirdBGTrees', -1300, -750, 0.5, 0.5);
+				var fartree:BGSprite = new BGSprite('mario/Turmoil/ThirdBGTrees', -1300, -750, 3.5, 3.5);
 				add(fartree);
 
-				var backtree:BGSprite = new BGSprite('mario/Turmoil/SecondBGTrees', -1300, -750, 0.8, 0.8);
+				var backtree:BGSprite = new BGSprite('mario/Turmoil/SecondBGTrees', -1300, -750, 3.8, 3.8);
 				add(backtree);
 
-				var floor:BGSprite = new BGSprite('mario/Turmoil/MainFloorAndTrees', -1300, -750, 1, 1);
+				var floor:BGSprite = new BGSprite('mario/Turmoil/MainFloorAndTrees', -1300, -750, 4, 4);
 				add(floor);
 
-				var lashojas:BGSprite = new BGSprite('mario/Turmoil/TreeLeaves', -1300, -350, 1.9, 1.9);
+				var lashojas:BGSprite = new BGSprite('mario/Turmoil/TreeLeaves', -1300, -350, 4.9, 4.9);
 				add(lashojas);
 
-				var ramasnose:BGSprite = new BGSprite('mario/Turmoil/TreesForeground', -1300, -350, 1.4, 1.4);
+				var ramasnose:BGSprite = new BGSprite('mario/Turmoil/TreesForeground', -1300, -350, 4.4, 4.4);
 				add(ramasnose);
 
-				warning = new BGSprite('mario/Turmoil/Turmoil_HARHARHARHAR', -1300, -350, 1.4, 1.4);
+				warning = new BGSprite('mario/Turmoil/Turmoil_HARHARHARHAR', -1300, -350, 4.4, 4.4);
 				warning.cameras = [camEst];
 				warning.alpha = 0;
 				warning.screenCenter();
