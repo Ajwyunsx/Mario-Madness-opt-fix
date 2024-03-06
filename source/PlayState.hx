@@ -3278,23 +3278,29 @@ class PlayState extends MusicBeatState
                                 noCount = true;
 				noHUD = true;
 
-				var fartree:BGSprite = new BGSprite('mario/Turmoil/ThirdBGTrees', -1300, -750, 3.5, 3.5);
+				var fartree:BGSprite = new BGSprite('mario/Turmoil/ThirdBGTrees', -1300, -750, 0.5, 0.5);
+				fartree.scale.set(4, 4);
 				add(fartree);
 
-				var backtree:BGSprite = new BGSprite('mario/Turmoil/SecondBGTrees', -1300, -750, 3.8, 3.8);
+				var backtree:BGSprite = new BGSprite('mario/Turmoil/SecondBGTrees', -1300, -750, 0.8, 0.8);
+				backtree.scale.set(4, 4);
 				add(backtree);
 
-				var floor:BGSprite = new BGSprite('mario/Turmoil/MainFloorAndTrees', -1300, -750, 4, 4);
+				var floor:BGSprite = new BGSprite('mario/Turmoil/MainFloorAndTrees', -1300, -750, 1, 1);
+				floor.scale.set(4, 4);
 				add(floor);
 
-				var lashojas:BGSprite = new BGSprite('mario/Turmoil/TreeLeaves', -1300, -350, 4.9, 4.9);
+				var lashojas:BGSprite = new BGSprite('mario/Turmoil/TreeLeaves', -1300, -350, 1.9, 1.9);
+				lashojas.scale.set(4, 4);
 				add(lashojas);
 
-				var ramasnose:BGSprite = new BGSprite('mario/Turmoil/TreesForeground', -1300, -350, 4.4, 4.4);
+				var ramasnose:BGSprite = new BGSprite('mario/Turmoil/TreesForeground', -1300, -350, 1.4, 1.4);
+				ramasnose.scale.set(4, 4);
 				add(ramasnose);
 
 				warning = new BGSprite('mario/Turmoil/Turmoil_HARHARHARHAR', -1300, -350, 4.4, 4.4);
 				warning.cameras = [camEst];
+				warning.scale.set(4.4, 4.4);
 				warning.alpha = 0;
 				warning.screenCenter();
 				add(warning);
@@ -10762,7 +10768,7 @@ class PlayState extends MusicBeatState
 				warning.alpha = 1;
 				var wary:Float = warning.y;
 				warning.y = wary - 50;
-				warning.scale.set(0.7, 0.7);
+				warning.scale.set(3.4, 3.7);
 				eventTweens.push(FlxTween.tween(warning, {y: wary, alpha: 0.2}, 0.5 * (1 / (Conductor.bpm / 60)), {ease: FlxEase.expoOut}));
 				eventTweens.push(FlxTween.tween(buttonxml, {alpha: 1}, 0.2, {ease: FlxEase.quadOut}));
 
@@ -10770,7 +10776,7 @@ class PlayState extends MusicBeatState
 				{
 					FlxG.sound.play(Paths.sound('warningT2'));
 					warning.alpha = 1;
-					eventTweens.push(FlxTween.tween(warning.scale, {y: 0.8, x: 0.8}, 0.5 * (1 / (Conductor.bpm / 60)), {ease: FlxEase.elasticOut}));
+					eventTweens.push(FlxTween.tween(warning.scale, {y: 3.8, x: 3.8}, 0.5 * (1 / (Conductor.bpm / 60)), {ease: FlxEase.elasticOut}));
 					eventTweens.push(FlxTween.tween(warning, {alpha: 0.2}, 0.5 * (1 / (Conductor.bpm / 60)), {ease: FlxEase.quadOut}));
 				}));
 
@@ -10778,7 +10784,7 @@ class PlayState extends MusicBeatState
 				{
 					FlxG.sound.play(Paths.sound('warningT2'));
 					warning.alpha = 1;
-					eventTweens.push(FlxTween.tween(warning.scale, {y: 1, x: 1}, 0.5 * (1 / (Conductor.bpm / 60)), {ease: FlxEase.elasticOut}));
+					eventTweens.push(FlxTween.tween(warning.scale, {y: 4, x: 4}, 0.5 * (1 / (Conductor.bpm / 60)), {ease: FlxEase.elasticOut}));
 					eventTweens.push(FlxTween.tween(warning, {alpha: 0}, 0.5 * (1 / (Conductor.bpm / 60)), {ease: FlxEase.quadOut}));
 				}));
 
