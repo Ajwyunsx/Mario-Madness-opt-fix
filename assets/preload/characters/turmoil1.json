@@ -81,8 +81,8 @@
 	"no_antialiasing": false,
 	"image": "characters/Turmoil_stand",
 	"position": [
-		835,
-		390
+		695,
+		410
 	],
 	"healthicon": "turmoil",
 	"flip_x": false,
@@ -92,9 +92,9 @@
 		133
 	],
 	"camera_position": [
-		-1670,
-		-250
+		-1440,
+		-200
 	],
 	"sing_duration": 4,
-	"scale": 4
+	"scale": 3.5
 }

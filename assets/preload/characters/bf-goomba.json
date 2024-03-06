@@ -147,8 +147,8 @@
 	"no_antialiasing": false,
 	"image": "characters/BF_Goomba",
 	"position": [
-		500,
-		670
+		450,
+		660
 	],
 	"healthicon": "gbf",
 	"flip_x": true,
@@ -158,9 +158,9 @@
 		209
 	],
 	"camera_position": [
-		950,
-		-400
+		800,
+		-310
 	],
 	"sing_duration": 4,
-	"scale": 4.1
+	"scale": 3.6
 }
