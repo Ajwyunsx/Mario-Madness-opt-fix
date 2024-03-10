@@ -157,7 +157,7 @@ class CreditsState extends MusicBeatState
 				}});
 			}});
 		}
-		for(i in 0...43){
+		for(i in 0...44){
 			var creditX = 430;
 			var creditY = i * 300 + 60;
 			//if(i % 2 != 0)
