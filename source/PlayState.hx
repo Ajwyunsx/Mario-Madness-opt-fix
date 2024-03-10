@@ -15086,8 +15086,7 @@ class PlayState extends MusicBeatState
 			if (script != null)
 		{
 			script.executeFunc("noteMissPress");
-			script.setVariable("isSustainNote", note.isSustainNote);
-			script.setVariable("noteType", note.noteType);
+			script.setVariable("direction", ghostMiss);
 		}
 		}
 	}
@@ -15245,8 +15244,8 @@ class PlayState extends MusicBeatState
 		if (script != null)
 		{
 			script.executeFunc("noteMiss");
-			script.setVariable("isSustainNote", note.isSustainNote);
-			script.setVariable("noteType", note.noteType);
+			script.setVariable("daNote.noteType", daNote.noteType);
+			script.setVariable("daNote.isSustainNote", daNote.isSustainNote);
 		}
 	}
 
@@ -15633,8 +15632,8 @@ class PlayState extends MusicBeatState
 			if (script != null)
 		{
 			script.executeFunc("goodNoteHit");
-			script.setVariable("noteType", note.noteType);
-			script.setVariable("isSustainNote", note.isSustainNote);
+			script.setVariable("note.noteType", note.noteType);
+			script.setVariable("note.isSustainNote", note.isSustainNote);
 		}
 
 			if (!note.isSustainNote)
