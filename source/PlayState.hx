@@ -1901,44 +1901,7 @@ class PlayState extends MusicBeatState
 				{
 					noHUD = true;
 					specialGameOver = true;
-					var bg:BGSprite = new BGSprite('mario/LuigiBeta/Skybox', -1200, -850, 0.2, 0.2);
-					bg.antialiasing = ClientPrefs.globalAntialiasing;
-					add(bg);
-
-					var scarymansion:BGSprite = new BGSprite('mario/LuigiBeta/BackBG', -1200, -850, 0.8, 0.8);
-					scarymansion.antialiasing = ClientPrefs.globalAntialiasing;
-					add(scarymansion);
-
-					add(gfGroup);
-
-					var betafire1:BGSprite = new BGSprite('mario/LuigiBeta/Alone_Fire', -320, -630, ['fire'], true);
-					//betafire.setGraphicSize(Std.int(lluvia.width * 1.7));
-					betafire1.antialiasing = ClientPrefs.globalAntialiasing;
-					add(betafire1);
-
-					var betafire2:BGSprite = new BGSprite('mario/LuigiBeta/Alone_Fire', 1270, -630, ['fire'], true);
-					//betafire.setGraphicSize(Std.int(lluvia.width * 1.7));
-					betafire2.antialiasing = ClientPrefs.globalAntialiasing;
-					betafire2.flipX = true;
-					add(betafire2);
-
-					var scaryfloor:BGSprite = new BGSprite('mario/LuigiBeta/FrontBG', -1200, -850);
-					scaryfloor.antialiasing = ClientPrefs.globalAntialiasing;
-					add(scaryfloor);
-
-					starmanGF = new BGSprite('characters/Beta_Luigi_GF_Assets', 570, 100, 1, 1, ["GFIdle"], false);
-					starmanGF.animation.addByIndices('danceRight', 'GFIdle', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], "", 24, false);
-					starmanGF.animation.addByIndices('danceLeft', 'GFIdle', [30,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], "", 24, false);
-					starmanGF.animation.addByPrefix('sad', "GFMiss", 24, false);
-					starmanGF.antialiasing = ClientPrefs.globalAntialiasing;
-					add(starmanGF);
-
-					lluvia = new BGSprite('mario/LuigiBeta/old/Beta_Luigi_Rain_V1', -170, 50, ['RainLuigi'], true);
-					lluvia.setGraphicSize(Std.int(lluvia.width * 1.7));
-					lluvia.alpha = 0;
-					lluvia.antialiasing = ClientPrefs.globalAntialiasing;
-					lluvia.cameras = [camEst];
-					add(lluvia);
+					
 					
 					//alone mario
 					iconGF = new FlxSprite().loadGraphic(Paths.image('icons/icon-LG'));
@@ -15120,6 +15083,12 @@ class PlayState extends MusicBeatState
 		{
 			noteMissPress(direction, ghostMiss);
 			callOnLuas('noteMissPress', [direction]);
+			if (script != null)
+		{
+			script.executeFunc("noteMissPress");
+			script.setVariable("note.isSustainNote", note.isSustainNote);
+			script.setVariable("note.noteType", note.noteType);
+		}
 		}
 	}
 
@@ -15273,6 +15242,12 @@ class PlayState extends MusicBeatState
 			daNote.noteType,
 			daNote.isSustainNote
 		]);
+		if (script != null)
+		{
+			script.executeFunc("noteMiss");
+			script.setVariable("note.isSustainNote", note.isSustainNote);
+			script.setVariable("note.noteType", note.noteType);
+		}
 	}
 
 	function noteMissPress(direction:Int = 1, ?ghostMiss:Bool = false):Void // You pressed a key when there was no notes to press for this key
@@ -15655,6 +15630,12 @@ class PlayState extends MusicBeatState
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
 			callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
+			if (script != null)
+		{
+			script.executeFunc("goodNoteHit");
+			script.setVariable("note.noteType", note.noteType);
+			script.setVariable("note.isSustainNote", note.isSustainNote);
+		}
 
 			if (!note.isSustainNote)
 			{
@@ -17188,6 +17169,18 @@ class PlayState extends MusicBeatState
 			script.setVariable("onCreatePost", function()
 			{
 			});
+			
+			script.setVariable("noteMiss", function()
+			{
+			});
+			
+			script.setVariable("noteMissPress", function()
+			{
+			});
+			
+			script.setVariable("goodNoteHit", function()
+			{
+			});
 
 			script.setVariable("onStartCountdown", function()
 			{
@@ -17246,6 +17239,7 @@ class PlayState extends MusicBeatState
 			script.setVariable("FlxBackdrop", FlxBackdrop);
 			script.setVariable("FlxEase", FlxEase);
 			script.setVariable("FlxSprite", FlxSprite);
+			script.setVariable("BGSprite", BGSprite);
 			script.setVariable("Math", Math);
 			script.setVariable("FlxG", FlxG);
 			script.setVariable("ClientPrefs", ClientPrefs);
