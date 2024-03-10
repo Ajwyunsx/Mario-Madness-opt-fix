@@ -15086,8 +15086,8 @@ class PlayState extends MusicBeatState
 			if (script != null)
 		{
 			script.executeFunc("noteMissPress");
-			script.setVariable("note.isSustainNote", note.isSustainNote);
-			script.setVariable("note.noteType", note.noteType);
+			script.setVariable("isSustainNote", note.isSustainNote);
+			script.setVariable("noteType", note.noteType);
 		}
 		}
 	}
@@ -15245,8 +15245,8 @@ class PlayState extends MusicBeatState
 		if (script != null)
 		{
 			script.executeFunc("noteMiss");
-			script.setVariable("note.isSustainNote", note.isSustainNote);
-			script.setVariable("note.noteType", note.noteType);
+			script.setVariable("isSustainNote", note.isSustainNote);
+			script.setVariable("noteType", note.noteType);
 		}
 	}
 
@@ -15633,8 +15633,8 @@ class PlayState extends MusicBeatState
 			if (script != null)
 		{
 			script.executeFunc("goodNoteHit");
-			script.setVariable("note.noteType", note.noteType);
-			script.setVariable("note.isSustainNote", note.isSustainNote);
+			script.setVariable("noteType", note.noteType);
+			script.setVariable("isSustainNote", note.isSustainNote);
 		}
 
 			if (!note.isSustainNote)
@@ -16735,6 +16735,11 @@ class PlayState extends MusicBeatState
 
 		setOnLuas('curBeat', curBeat);
 		callOnLuas('onBeatHit', []);
+		if (script != null)
+		{
+			script.setVariable("curBeat", curBeat);
+			script.executeFunc("onBeatHit");
+		}
 	}
 
 	public function callOnLuas(event:String, args:Array<Dynamic>):Dynamic
