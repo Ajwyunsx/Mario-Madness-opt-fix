@@ -17235,10 +17235,6 @@ class PlayState extends MusicBeatState
 
 			script.setVariable("curStep", curStep);
 			script.setVariable("curBeat", curBeat);
-			script.setVariable("note.noteType", note.noteType);
-			script.setVariable("daNote.noteType", daNote.noteType);
-			script.setVariable("daNote.isSustainNote", daNote.isSustainNote);
-			script.setVariable("note.isSustainNote", note.isSustainNote);
 			script.setVariable("bpm", SONG.bpm);
 
 			// PRESET CLASSES
