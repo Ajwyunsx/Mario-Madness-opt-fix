@@ -64,6 +64,7 @@ import openfl.filters.ShaderFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import sys.FileSystem;
 import sys.io.File;
+import hscript.Script;
 
 using StringTools;
 using flixel.util.FlxSpriteUtil;
@@ -775,6 +776,9 @@ class PlayState extends MusicBeatState
 	var keysPressed:Array<Bool> = [false, false, false, false];
 	var boyfriendIdleTime:Float = 0.0;
 	var boyfriendIdled:Bool = false;
+	
+	// Hscript
+	public var script:Script;
 
 	// Lua shit
 	public static var instance:PlayState;
@@ -3278,29 +3282,10 @@ class PlayState extends MusicBeatState
                                 noCount = true;
 				noHUD = true;
 				
-				var fartree:FlxSprite = new FlxSprite(-1300, -750).loadGraphic(Paths.image('mario/Turmoil/ThirdBGTrees'));
-				fartree.scale.set(3.5, 3.5);
-				add(fartree);
-
-				var backtree:FlxSprite = new FlxSprite(-1300, -750).loadGraphic(Paths.image('mario/Turmoil/SecondBGTrees'));
-				backtree.scale.set(3.5, 3.5);
-				add(backtree);
-
-				var floor:FlxSprite = new FlxSprite(-1300, -750).loadGraphic(Paths.image('mario/Turmoil/MainFloorAndTrees'));
-				floor.scale.set(3.35, 3.35);
-				add(floor);
-
-				var lashojas:FlxSprite = new FlxSprite(-1300, -350).loadGraphic(Paths.image('mario/Turmoil/TreeLeaves'));
-				lashojas.scale.set(3.5, 3.5);
-				add(lashojas);
-
-				var ramasnose:FlxSprite = new FlxSprite(-1300, -350).loadGraphic(Paths.image('mario/Turmoil/TreesForeground'));
-				ramasnose.scale.set(3.35, 3.35);
-				add(ramasnose);
 
 				warning = new BGSprite('mario/Turmoil/Turmoil_HARHARHARHAR', -1300, -350, 4.4, 4.4);
 				warning.cameras = [camEst];
-				warning.scale.set(4.4, 4.4);
+				warning.scale.set(3.1, 3.1);
 				warning.alpha = 0;
 				warning.screenCenter();
 				add(warning);
@@ -4898,6 +4883,8 @@ class PlayState extends MusicBeatState
 
 		opponentStrums = new FlxTypedGroup<StrumNote>();
 		playerStrums = new FlxTypedGroup<StrumNote>();
+		
+		startScript();
 
 		// startCountdown();
 
@@ -5879,6 +5866,12 @@ class PlayState extends MusicBeatState
 		#end
 
 		callOnLuas('onCreatePost', []);
+		
+		if (script != null)
+		{
+			script.executeFunc("onCreate");
+			script.executeFunc("onCreatePost");
+		}
 
 		super.create();
 	}
@@ -15995,6 +15988,11 @@ class PlayState extends MusicBeatState
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
+		if (script != null)
+		{
+			script.setVariable("curStep", curStep);
+			script.executeFunc("onStepHit");
+		}
 	}
 
 	var lightningStrikeBeat:Int = 0;
@@ -17139,4 +17137,113 @@ class PlayState extends MusicBeatState
 
         return finalVal;
     }
+    public function startScript()
+	{
+		var formattedFolder:String = Paths.formatToSongPath(SONG.song);
+		//var curStageFolder:String = curStage;
+
+		var path:String = Paths.hscript(formattedFolder + '/script');
+		
+		var stagepath:String = Paths.hscriptstages(curStage);
+
+		var hxdata:String = "";
+		
+		var hxsdata:String = "";
+
+		if (OpenFlAssets.exists(path))
+			hxdata = OpenFlAssets.getText(path);
+		
+		if (OpenFlAssets.exists(stagepath))
+			hxsdata = OpenFlAssets.getText(stagepath);
+
+		if (hxdata != "" || hxsdata != "")
+		{
+			script = new Script();
+
+			script.setVariable("onSongStart", function()
+			{
+			});
+
+			script.setVariable("destroy", function()
+			{
+			});
+
+			script.setVariable("onCreate", function()
+			{
+			});
+			
+			script.setVariable("onCreatePost", function()
+			{
+			});
+
+			script.setVariable("onStartCountdown", function()
+			{
+			});
+
+			script.setVariable("onStepHit", function()
+			{
+			});
+			
+			script.setVariable("onEvent", function()
+			{
+			});
+			
+			script.setVariable("onBeatHit", function()
+			{
+			});
+
+			script.setVariable("onUpdate", function()
+			{
+			});
+			
+			script.setVariable("onUpdatePost", function()
+			{
+			});
+			
+			script.setVariable("onMoveCamera", function()
+			{
+			});
+
+			script.setVariable("import", function(lib:String, ?as:Null<String>) // Does this even work?
+			{
+				if (lib != null && Type.resolveClass(lib) != null)
+				{
+					script.setVariable(as != null ? as : lib, Type.resolveClass(lib));
+				}
+			});
+
+			script.setVariable("fromRGB", function(Red:Int, Green:Int, Blue:Int, Alpha:Int = 255)
+			{
+				return FlxColor.fromRGB(Red, Green, Blue, Alpha);
+			});
+
+			script.setVariable("curStep", curStep);
+			script.setVariable("curBeat", curBeat);
+			script.setVariable("bpm", SONG.bpm);
+
+			// PRESET CLASSES
+			script.setVariable("PlayState", instance);
+			script.setVariable("FlxTween", FlxTween);
+			script.setVariable("FlxBackdrop", FlxBackdrop);
+			script.setVariable("FlxEase", FlxEase);
+			script.setVariable("FlxSprite", FlxSprite);
+			script.setVariable("Math", Math);
+			script.setVariable("FlxG", FlxG);
+			script.setVariable("ClientPrefs", ClientPrefs);
+			script.setVariable("FlxTimer", FlxTimer);
+			script.setVariable("Main", Main);
+			//script.setVariable("eventName", eventName);
+			script.setVariable("Conductor", Conductor);
+			script.setVariable("Std", Std);
+			script.setVariable("FlxTextBorderStyle", FlxTextBorderStyle);
+			script.setVariable("Paths", Paths);
+			script.setVariable("CENTER", FlxTextAlign.CENTER);
+			script.setVariable("FlxTextFormat", FlxTextFormat);
+			script.setVariable("InputFormatter", InputFormatter);
+			script.setVariable("FlxTextFormatMarkerPair", FlxTextFormatMarkerPair);
+
+			script.runScript(hxdata);
+			script.runScript(hxsdata);
+		}
+	}
 }
