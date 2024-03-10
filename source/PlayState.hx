@@ -17216,6 +17216,34 @@ class PlayState extends MusicBeatState
 			{
 				return FlxColor.fromRGB(Red, Green, Blue, Alpha);
 			});
+			
+			script.setVariable("add", function(obj:FlxBasic, ?front:Bool = false)
+		{
+			if (front)
+			{
+				getInstance().add(obj);
+			}
+			else
+			{
+				if (PlayState.instance.isDead)
+				{
+					GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), obj);
+				}
+				else
+				{
+					var position:Int = PlayState.instance.members.indexOf(PlayState.instance.gfGroup);
+					if (PlayState.instance.members.indexOf(PlayState.instance.boyfriendGroup) < position)
+					{
+						position = PlayState.instance.members.indexOf(PlayState.instance.boyfriendGroup);
+					}
+					else if (PlayState.instance.members.indexOf(PlayState.instance.dadGroup) < position)
+					{
+						position = PlayState.instance.members.indexOf(PlayState.instance.dadGroup);
+					}
+					PlayState.instance.insert(position, obj);
+				}
+			}
+		});
 
 			script.setVariable("curStep", curStep);
 			script.setVariable("curBeat", curBeat);
