@@ -125,8 +125,8 @@
 	"no_antialiasing": false,
 	"image": "characters/Beta_Luigi_Assets",
 	"position": [
-		-170,
-		40
+		-90,
+		180
 	],
 	"healthicon": "beta2",
 	"flip_x": false,
@@ -136,9 +136,9 @@
 		74
 	],
 	"camera_position": [
-		30,
-		50
+		60,
+		-80
 	],
 	"sing_duration": 4,
-	"scale": 1.2
+	"scale": 2.4
 }
