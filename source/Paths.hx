@@ -163,6 +163,16 @@ class Paths
 		return getPath('data/$key.json', TEXT, library);
 	}
 
+	inline static public function hscript(key:String, ?library:String)
+	{
+		return getPath('data/$key.hx', TEXT, library);
+	}
+	
+	inline static public function hscriptstages(key:String, ?library:String)
+	{
+		return getPath('stages/$key.hx', TEXT, library);
+	}
+
 	inline static public function shaderFragment(key:String, ?library:String)
 	{
 		return getPath('shaders/$key.frag', TEXT, library);
