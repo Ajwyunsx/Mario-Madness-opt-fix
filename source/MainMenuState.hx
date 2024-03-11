@@ -110,7 +110,6 @@ class MainMenuState extends MusicBeatState {
 	// ! FOR STAR DATAS, PUT THE SAVE IN CLIENTPREFS.HX IN THE ORDER YOU WANT THE STARS TO APPEAR -lunar
 	var starData:Array<Bool> = [ClientPrefs.storySave[0], ClientPrefs.storySave[6], ClientPrefs.storySave[7], ClientPrefs.storySave[8]];
 
-	public var bloom:BloomShader;
 	public var ntsc:NTSCGlitch;
 
 	var selectedSomethin:Bool = false;
@@ -186,9 +185,7 @@ class MainMenuState extends MusicBeatState {
 
 		FlxG.camera.pixelPerfectRender = false;
 
-		bloom = new BloomShader();
-		bloom.Size.value = [1];
-		FlxG.camera.setFilters([new ShaderFilter(ntsc = new NTSCGlitch(0.4)), new ShaderFilter(bloom)]);
+		FlxG.camera.setFilters([new ShaderFilter(ntsc = new NTSCGlitch(0.4))]);
 
 		var stagenumb:Int = ClientPrefs.menuBG - 1;
 
@@ -636,23 +633,15 @@ class MainMenuState extends MusicBeatState {
 		selectedSomethin = true; WEHOVERING = false;
 		FlxG.sound.play(Paths.sound('confirmMenu'));
 
-		if (ClientPrefs.flashing && bloom != null) {
-			bloom.Size.value = [45];
-			bloom.dim.value = [0.3];
+		if (ClientPrefs.flashing) {
 
 			var twn1:NumTween;
 			var twn2:NumTween;
 
 			twn1 = FlxTween.num(4.0, 0.0, .5, {
-				onUpdate: (_) -> {
-					bloom.Size.value = [twn1.value];
-				}
 			});
 
 			twn2 = FlxTween.num(0.1, 2.0, .5, {
-				onUpdate: (_) -> {
-					bloom.dim.value = [twn2.value];
-				}
 			});
 		}
 
@@ -772,7 +761,7 @@ class MainMenuState extends MusicBeatState {
 			star.x = Math.PI + (star.width * 1.25); star.alpha = 0; // TO STOP STUPID FUCKING GLITCH
 			FlxTween.tween(star, {x: star.x - (star.width * 1.25), alpha: 1}, 0.4, {ease: FlxEase.circOut, startDelay: 0.1 + (0.1 * star.ID)});
 		}
-		FlxG.camera.setFilters([new ShaderFilter(ntsc), new ShaderFilter(bloom)]);
+		FlxG.camera.setFilters([new ShaderFilter(ntsc)]);
 
 		for (spr in [fondo11, estatica]) {
 			if (spr.alpha >= 0.99) return;
@@ -1015,15 +1004,9 @@ class MainMenuState extends MusicBeatState {
 				var twn2:NumTween;
 		
 				twn1 = FlxTween.num(1, 2, 2, {
-					onUpdate: (_) -> {
-						bloom.Size.value = [twn1.value];
-					}
 				});
 		
 				twn2 = FlxTween.num(2.0, 0.1, 2, {
-					onUpdate: (_) -> {
-						bloom.dim.value = [twn2.value];
-					}
 				});
 		
 				for (i in 0...10){
@@ -1047,5 +1030,3 @@ class MainMenuState extends MusicBeatState {
 		penkStage++;
 	}
     }
-
-

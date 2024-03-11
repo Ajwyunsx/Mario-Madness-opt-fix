@@ -104,7 +104,7 @@ class StoryMenuState extends MusicBeatSubstate
 		lineSpr.scrollFactor.set(1.2, 1.2);
 		add(lineSpr);
 		
-		dumbTween = FlxTween.num(2.0, 0.8, 4, {ease: FlxEase.expoOut}, (v:Float) -> {MainMenuState.instance.bloom.dim.value = [v];});
+		dumbTween = FlxTween.num(2.0, 0.8, 4, {ease: FlxEase.expoOut});
 
 		selSpr = new FlxSprite().loadGraphic(Paths.image('modstuff/storymode/text1'));
 		selSpr.antialiasing = ClientPrefs.globalAntialiasing;
@@ -230,7 +230,6 @@ class StoryMenuState extends MusicBeatSubstate
 		super.destroy();
 
 		dumbTween.cancel();
-		MainMenuState.instance.bloom.dim.value = [2.0];
 
 		dumbTween2.cancel();
 	}
@@ -344,23 +343,14 @@ class StoryMenuState extends MusicBeatSubstate
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 		FlxG.sound.play(Paths.sound('riser'), 1);
-		var bloom:BloomShader = MainMenuState.instance.bloom;
-		bloom.Size.value = [0];
-		bloom.dim.value = [.8];
 
 		var twn1:NumTween;
 		var twn2:NumTween;
 
 		twn1 = FlxTween.num(0, 2, 2, {
-			onUpdate: (_) -> {
-				bloom.Size.value = [twn1.value];
-			}
 		});
 
 		twn2 = FlxTween.num(.8, 0.1, 2, {
-			onUpdate: (_) -> {
-				bloom.dim.value = [twn2.value];
-			}
 		});
 
 		for (i in 0...10){
