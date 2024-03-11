@@ -176,8 +176,6 @@ vec4 noise( in vec2 p ) {
 }
 
 vec4 vec4pow( in vec4 v, in float p ) {
-    // Don't touch alpha (w), we use it to choose the direction of the shift
-    // and we don't want it to go in one direction more often than the other
     return vec4(pow(v.x,p),pow(v.y,p),pow(v.z,p),v.w); 
 }
 
