@@ -643,6 +643,7 @@ class MainMenuState extends MusicBeatState {
 
 			twn2 = FlxTween.num(0.1, 2.0, .5, {
 			});
+			FlxG.camera.flash(0xffffffff, 0.5);
 		}
 
 		for (star in stars) {
