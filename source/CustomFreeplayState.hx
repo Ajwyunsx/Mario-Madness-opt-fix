@@ -584,7 +584,6 @@ class FreeplaySubState extends MusicBeatSubstate
 	function goToSong()
 	{
 		FlxG.sound.play(Paths.sound('FREEPLAY_START'), 1);
-		FlxG.camera.flash(0xffffffff, 0.5);
 		quieto = true;
 		tween.cancel();
 		PlayState.ogwinX = Lib.application.window.x;
@@ -606,6 +605,7 @@ class FreeplaySubState extends MusicBeatSubstate
 			});
 
 			FlxG.camera.shake(0.002, 0.2);
+			FlxG.camera.flash(0xffff0000, 0.5);
 		}
 
 		boxgrp.forEach(function(char:FlxSprite)
