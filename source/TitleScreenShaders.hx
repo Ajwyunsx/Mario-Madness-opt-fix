@@ -108,75 +108,117 @@ class NTSCGlitch extends FlxShader // stolen from that one popular vhs shader us
 	@:glFragmentSource('
      #pragma header
 
-    uniform float time;
-    uniform vec2 resolution;
+#define round(a) floor(a + 0.5)
+#define iResolution vec3(openfl_TextureSize, 0.)
+uniform float iTime;
+#define iChannel0 bitmap
+uniform sampler2D iChannel1;
+uniform sampler2D iChannel2;
+uniform sampler2D iChannel3;
+#define texture flixel_texture2D
 
-    uniform float glitchAmount;
+// third argument fix
+vec4 flixel_texture2D(sampler2D bitmap, vec2 coord, float bias) {
+	vec4 color = texture2D(bitmap, coord, bias);
+	if (!hasTransform)
+	{
+		return color;
+	}
+	if (color.a == 0.0)
+	{
+		return vec4(0.0, 0.0, 0.0, 0.0);
+	}
+	if (!hasColorTransform)
+	{
+		return color * openfl_Alphav;
+	}
+	color = vec4(color.rgb / color.a, color.a);
+	mat4 colorMultiplier = mat4(0);
+	colorMultiplier[0][0] = openfl_ColorMultiplierv.x;
+	colorMultiplier[1][1] = openfl_ColorMultiplierv.y;
+	colorMultiplier[2][2] = openfl_ColorMultiplierv.z;
+	colorMultiplier[3][3] = openfl_ColorMultiplierv.w;
+	color = clamp(openfl_ColorOffsetv + (color * colorMultiplier), 0.0, 1.0);
+	if (color.a > 0.0)
+	{
+		return vec4(color.rgb * color.a * openfl_Alphav, color.a * openfl_Alphav);
+	}
+	return vec4(0.0, 0.0, 0.0, 0.0);
+}
 
-    #define PI 3.14159265
+// variables which is empty, they need just to avoid crashing shader
+uniform float iTimeDelta;
+uniform float iFrameRate;
+uniform int iFrame;
+#define iChannelTime float[4](iTime, 0., 0., 0.)
+#define iChannelResolution vec3[4](iResolution, vec3(0.), vec3(0.), vec3(0.))
+uniform vec4 iMouse;
+uniform vec4 iDate;
 
-    vec4 tex2D( sampler2D _tex, vec2 _p ){
-        vec4 col = texture2D( _tex, _p );
-        if ( 0.5 < abs( _p.x - 0.5 ) ) {
-            col = vec4( 0.1 );
-        }
-        return col;
-    }
+uniform float AMPLITUDE;
+uniform float SPEED;
 
-    float hash( vec2 _v ){
-        return fract( sin( dot( _v, vec2( 89.44, 19.36 ) ) ) * 22189.22 );
-    }
+vec4 rgbShift( in vec2 p , in vec4 shift) {
+    shift *= 2.0*shift.w - 1.0;
+    vec2 rs = vec2(shift.x,-shift.y);
+    vec2 gs = vec2(shift.y,-shift.z);
+    vec2 bs = vec2(shift.z,-shift.x);
+    
+    float r = texture(iChannel0, p+rs, 0.0).x;
+    float g = texture(iChannel0, p+gs, 0.0).y;
+    float b = texture(iChannel0, p+bs, 0.0).z;
+    
+    return vec4(r,g,b,1.0);
+}
 
-    float iHash( vec2 _v, vec2 _r ){
-        float h00 = hash( vec2( floor( _v * _r + vec2( 0.0, 0.0 ) ) / _r ) );
-        float h10 = hash( vec2( floor( _v * _r + vec2( 1.0, 0.0 ) ) / _r ) );
-        float h01 = hash( vec2( floor( _v * _r + vec2( 0.0, 1.0 ) ) / _r ) );
-        float h11 = hash( vec2( floor( _v * _r + vec2( 1.0, 1.0 ) ) / _r ) );
-        vec2 ip = vec2( smoothstep( vec2( 0.0, 0.0 ), vec2( 1.0, 1.0 ), mod( _v*_r, 1. ) ) );
-        return ( h00 * ( 1. - ip.x ) + h10 * ip.x ) * ( 1. - ip.y ) + ( h01 * ( 1. - ip.x ) + h11 * ip.x ) * ip.y;
-    }
+vec4 noise( in vec2 p ) {
+    return texture(iChannel1, p, 0.0);
+}
 
-    float noise( vec2 _v ){
-        float sum = 0.;
-        for( int i=1; i<9; i++ )
-        {
-            sum += iHash( _v + vec2( i ), vec2( 2. * pow( 2., float( i ) ) ) ) / pow( 2., float( i ) );
-        }
-        return sum;
-    }
+vec4 vec4pow( in vec4 v, in float p ) {
+    // Don't touch alpha (w), we use it to choose the direction of the shift
+    // and we don't want it to go in one direction more often than the other
+    return vec4(pow(v.x,p),pow(v.y,p),pow(v.z,p),v.w); 
+}
 
-    void main(){
-        vec2 uvn = openfl_TextureCoordv.xy;
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+	vec2 p = openfl_TextureCoordv.xy;
+    vec4 c = vec4(0.0,0.0,0.0,1.0);
+    
+    // Elevating shift values to some high power (between 8 and 16 looks good)
+    // helps make the stuttering look more sudden
+    vec4 shift = vec4pow(noise(vec2(SPEED*iTime,2.0*SPEED*iTime/25.0 )),8.0)
+        		*vec4(AMPLITUDE,AMPLITUDE,AMPLITUDE,1.0);;
+    
+    c += rgbShift(p, shift);
+    
+	fragColor = c;
+}
 
-        // tape wave
-        uvn.x += ( noise( vec2( uvn.y, time ) ) - 0.5 )* 0.002;
-        uvn.x += ( noise( vec2( uvn.y * 100.0, time * 10.0 ) ) - 0.5 ) * (0.01*glitchAmount);
-
-        vec4 col = tex2D( bitmap, uvn );
-
-        col *= 1.0 + clamp( noise( vec2( 0.0, uvn.y + time * 0.2 ) ) * 0.6 - 0.25, 0.0, 0.1 );
-
-        gl_FragColor = col;
-    }
+void main() {
+	mainImage(gl_FragColor, openfl_TextureCoordv*openfl_TextureSize);
+}
     ')
 	public override function new(?_glitch:Float = 2)
 	{
 		super();
 
-		time.value = [0];
-		resolution.value = [FlxG.width, FlxG.height];
+		iTime.value = [0];
+		AMPLITUDE.value = [FlxG.width, FlxG.height];
 
 		setGlitch(_glitch);
 	}
 
 	public inline function setGlitch(?amount:Float = 0)
 	{
-		glitchAmount.value = [amount];
+		AMPLITUDE.value = [0.1];
+		SPEED.value = [0.1];
 	}
 
 	public inline function update(elapsed:Float)
 	{
-		time.value[0] += elapsed;
+		iTime.value[0] += elapsed;
 	}
 }
 
