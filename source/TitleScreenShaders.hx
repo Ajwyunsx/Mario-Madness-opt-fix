@@ -6,29 +6,6 @@ import flixel.system.FlxAssets.FlxShader;
 /**
  * By @Ne_Eo_Twitch, modded a bit by lunar
  */
-class NTSCSFilter extends FlxShader {
-	@:glFragmentSource('
-	#pragma header
-	uniform float time;
-
-	// DECODE NTSC AND CRT EFFECTS
-
-	void main()
-{
-    vec2 uv = openfl_TextureCoordv.xy;
-    gl_FragColor = texture2D(iChannel0, uv) + time;
- }
-	')
-	public function new(scanlineEffect:Float = 1) {
-		super();
-		this.time.value = [0];
-		//this.uScanlineEffect.value = [scanlineEffect];
-	}
-
-	public function update(elapsed:Float) {
-		this.time.value[0] += elapsed;
-	}
-}
 
 class NTSCGlitch extends FlxShader // stolen from that one popular vhs shader used in ourple guy criminal
 {
