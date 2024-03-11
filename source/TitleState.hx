@@ -49,10 +49,6 @@ class TitleState extends MusicBeatState {
 	var ntsc:NTSCSFilter;
 	var staticShader:TVStatic;
 
-	var windowTwn:FlxTween;
-
-	var windowRes:FlxPoint;
-	var windowPos:FlxPoint;
 	var startTime:Float;
 
 	override public function create():Void {
@@ -101,8 +97,6 @@ class TitleState extends MusicBeatState {
 				BaseScaleMode.ogSize = FlxPoint.get(1280, 720); // fuck you haxeflixel
 				FlxG.scaleMode = new flixel.system.scaleModes.RatioScaleMode();
 		
-				FlxG.resizeWindow(1280, 720);
-				FlxG.resizeGame(1280, 720);
 				return;
 				#end
 				*/
@@ -373,23 +367,6 @@ class TitleState extends MusicBeatState {
 							startDelay: 0.04,
 							onComplete: (_) -> {
 								FlxG.updateFramerate = 30; // Makes it smoother and consistant
-
-								windowRes = FlxPoint.get(Lib.application.window.width, Lib.application.window.height);
-								windowPos = CoolUtil.getCenterWindowPoint();
-								startTime = Sys.time();
-								
-							        windowTwn = FlxTween.tween(windowRes, {x: 1280, y: 720}, 0.3 * 4, {ease: FlxEase.circInOut, onUpdate: (_) -> {
-									FlxG.resizeWindow(Std.int(windowRes.x), Std.int(windowRes.y));
-									CoolUtil.centerWindowOnPoint(windowPos);
-									if ((Sys.time() - startTime) > 1.35) {
-										windowTwn.cancel();
-										completeWindowTwn();
-									}
-								}, onComplete: function(twn:FlxTween)
-									{
-										completeWindowTwn();
-									}
-								});
 					                        FlxG.camera.visible = false;
 								camHUD.visible = false;
 							}
