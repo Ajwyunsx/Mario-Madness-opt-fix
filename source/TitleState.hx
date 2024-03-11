@@ -367,6 +367,11 @@ class TitleState extends MusicBeatState {
 							startDelay: 0.04,
 							onComplete: (_) -> {
 								FlxG.updateFramerate = 30; // Makes it smoother and consistant
+								startTime = Sys.time();
+								
+							        if ((Sys.time() - startTime) > 1.35) {
+								completeWindowTwn();
+							}
 					                        FlxG.camera.visible = false;
 								camHUD.visible = false;
 							}
