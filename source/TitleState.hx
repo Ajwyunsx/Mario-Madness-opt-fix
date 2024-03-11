@@ -341,6 +341,7 @@ class TitleState extends MusicBeatState {
 
 				twn2 = FlxTween.num(0.25, 2.0, 1.5, {
 				});
+				FlxG.camera.flash(0xffff0000, 0.5);
 			}
 
 			for (obj in [camGame, curtain, blackSprite])
