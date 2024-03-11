@@ -110,7 +110,7 @@ class NTSCGlitch extends FlxShader // stolen from that one popular vhs shader us
 
 #define round(a) floor(a + 0.5)
 #define iResolution vec3(openfl_TextureSize, 0.)
-uniform float iTime;
+uniform float time;
 #define iChannel0 bitmap
 uniform sampler2D iChannel1;
 uniform sampler2D iChannel2;
@@ -147,10 +147,10 @@ vec4 flixel_texture2D(sampler2D bitmap, vec2 coord, float bias) {
 }
 
 // variables which is empty, they need just to avoid crashing shader
-uniform float iTimeDelta;
+uniform float timeDelta;
 uniform float iFrameRate;
 uniform int iFrame;
-#define iChannelTime float[4](iTime, 0., 0., 0.)
+#define iChannelTime float[4](time, 0., 0., 0.)
 #define iChannelResolution vec3[4](iResolution, vec3(0.), vec3(0.), vec3(0.))
 uniform vec4 iMouse;
 uniform vec4 iDate;
@@ -186,7 +186,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     // Elevating shift values to some high power (between 8 and 16 looks good)
     // helps make the stuttering look more sudden
-    vec4 shift = vec4pow(noise(vec2(SPEED*iTime,2.0*SPEED*iTime/25.0 )),8.0)
+    vec4 shift = vec4pow(noise(vec2(SPEED*time,2.0*SPEED*time/25.0 )),8.0)
         		*vec4(AMPLITUDE,AMPLITUDE,AMPLITUDE,1.0);;
     
     c += rgbShift(p, shift);
@@ -202,7 +202,7 @@ void main() {
 	{
 		super();
 
-		iTime.value = [0];
+		time.value = [0];
 		AMPLITUDE.value = [FlxG.width, FlxG.height];
 
 		setGlitch(_glitch);
@@ -210,13 +210,13 @@ void main() {
 
 	public inline function setGlitch(?amount:Float = 0)
 	{
-		AMPLITUDE.value = [0.1];
+		AMPLITUDE.value = [amount];
 		SPEED.value = [0.1];
 	}
 
 	public inline function update(elapsed:Float)
 	{
-		iTime.value[0] += elapsed;
+		time.value[0] += elapsed;
 	}
 }
 
