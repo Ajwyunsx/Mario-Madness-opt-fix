@@ -109,6 +109,7 @@ class CreditsState extends MusicBeatState
 		estatica.color = FlxColor.RED;
 		estatica.alpha = 0.3;
 		estatica.scrollFactor.set(0, 0);
+		estatica.scale.set(3.5, 3.5);
 		estatica.updateHitbox();
 		add(estatica);
 
@@ -157,7 +158,7 @@ class CreditsState extends MusicBeatState
 				}});
 			}});
 		}
-		for(i in 0...45){
+		for(i in 0...43){
 			var creditX = 430;
 			var creditY = i * 300 + 60;
 			//if(i % 2 != 0)
