@@ -216,9 +216,9 @@ class MainMenuState extends MusicBeatState {
 		estatica = new FlxSprite();
 		estatica.frames = Paths.getSparrowAtlas('modstuff/estatica_uwu');
 		estatica.animation.addByPrefix('idle', "Estatica papu", 15);
-		//estatica.scale.set(3.5, 3.5); cnmbc
-		estatica.scale.y = 3.5;
-		estatica.scale.x = 3.5;
+		estatica.scale.set(3.5, 3.5); //cnmbc
+		//estatica.scale.y = 3.5;
+		//estatica.scale.x = 3.5;
 		estatica.animation.play('idle');
 		estatica.antialiasing = false;
 		estatica.color = FlxColor.RED;
