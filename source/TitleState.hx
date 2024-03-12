@@ -283,9 +283,6 @@ class TitleState extends MusicBeatState {
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
-		if (ntsc != null)
-			ntsc.uFrame.value = [Conductor.songPosition];
-
 		if (staticShader != null)
 			staticShader.iTime.value = [Conductor.songPosition];
 
