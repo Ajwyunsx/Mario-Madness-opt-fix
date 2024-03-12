@@ -287,7 +287,6 @@ class TitleState extends MusicBeatState {
 			staticShader.iTime.value = [Conductor.songPosition];
 
 		var currentBeat = (Conductor.songPosition / 1000) * (Conductor.bpm / 60);
-		}
 
 		for (hand in hands) {
 			if (hand != null) {
