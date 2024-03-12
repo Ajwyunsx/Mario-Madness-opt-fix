@@ -46,7 +46,7 @@ class TitleState extends MusicBeatState {
 	var camHUD:FlxCamera;
 	var camGame:FlxCamera;
 
-	var ntsc:NTSCSFilter;
+	var bloom:BloomShader;
 	var staticShader:TVStatic;
 
 	var windowTwn:FlxTween;
@@ -154,7 +154,10 @@ class TitleState extends MusicBeatState {
 
 		Conductor.changeBPM(45.593);
 
-		camHUD.setFilters([new ShaderFilter(ntsc = new NTSCSFilter())]);
+		bloom = new BloomShader();
+		bloom.Size.value = [3.0];
+
+		camHUD.setFilters([new ShaderFilter(bloom)]);
 		@:privateAccess var shadersButCooler:Array<BitmapFilter> = [for (shader in camHUD._filters) shader]; // W NAMING!!!!
 		shadersButCooler.push(new ShaderFilter(staticShader = new TVStatic()));
 		FlxG.camera.setFilters(shadersButCooler);
@@ -288,6 +291,10 @@ class TitleState extends MusicBeatState {
 
 		var currentBeat = (Conductor.songPosition / 1000) * (Conductor.bpm / 60);
 
+		if (bloom != null && !transitioning) {
+			bloom.Size.value = [1.0 + (0.5 * FlxMath.fastSin(currentBeat * 2))];
+		}
+
 		for (hand in hands) {
 			if (hand != null) {
 				hand.y = 125 + 20 * FlxMath.fastCos((currentBeat / 2) * Math.PI);
@@ -336,17 +343,24 @@ class TitleState extends MusicBeatState {
 			if (titleText != null)
 				titleText.animation.play('press');
 
-			if (ClientPrefs.flashing) {
+			if (ClientPrefs.flashing && bloom != null) {
+				bloom.Size.value = [18 * 2];
+				bloom.dim.value = [0.25];
 
 				var twn1:NumTween;
 				var twn2:NumTween;
 
 				twn1 = FlxTween.num(18.0 * 2, 3.0, 1.5, {
+					onUpdate: (_) -> {
+						bloom.Size.value = [twn1.value];
+					}
 				});
 
 				twn2 = FlxTween.num(0.25, 2.0, 1.5, {
+					onUpdate: (_) -> {
+						bloom.dim.value = [twn2.value];
+					}
 				});
-				FlxG.camera.flash(0xffff0000, 0.5);
 			}
 
 			for (obj in [camGame, curtain, blackSprite])
