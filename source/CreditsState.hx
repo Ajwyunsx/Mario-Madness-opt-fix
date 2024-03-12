@@ -158,7 +158,7 @@ class CreditsState extends MusicBeatState
 				}});
 			}});
 		}
-		for(i in 0...43){
+		for(i in 0...45){
 			var creditX = 430;
 			var creditY = i * 300 + 60;
 			//if(i % 2 != 0)
@@ -333,8 +333,8 @@ class CreditsState extends MusicBeatState
 			if(newPos < 200)
 				newPos = 200;
 
-			if(13520 < newPos)
-				newPos = 13520;
+			if(14020 < newPos)
+				newPos = 14020;
 
 			if(camFollowPos.y != newPos){
 				var lerpVal:Float = CoolUtil.boundTo(elapsed * 5, 0, 1);
