@@ -336,7 +336,7 @@ class TitleState extends MusicBeatState {
 			if (titleText != null)
 				titleText.animation.play('press');
 
-			if (ClientPrefs.flashingl) {
+			if (ClientPrefs.flashing) {
 
 				var twn1:NumTween;
 				var twn2:NumTween;
