@@ -17287,7 +17287,7 @@ class PlayState extends MusicBeatState
 			script.setVariable("FlxTimer", FlxTimer);
 			script.setVariable("Main", Main);
 			script.setVariable("Note", Note);
-			script.setVariable("note", note);
+			//script.setVariable("note", note);
 			script.setVariable("Conductor", Conductor);
 			script.setVariable("Std", Std);
 			script.setVariable("FlxTextBorderStyle", FlxTextBorderStyle);
