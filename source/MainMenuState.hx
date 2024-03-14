@@ -213,14 +213,12 @@ class MainMenuState extends MusicBeatState {
 		bgFP.color = 0x00FF0000;
 		add(bgFP);
 
-		estatica = new FlxSprite(0, 0);
+		estatica = new FlxSprite();
 		estatica.frames = Paths.getSparrowAtlas('modstuff/estatica_uwu');
 		estatica.animation.addByPrefix('idle', "Estatica papu", 15);
-		estatica.scale.set(3.5, 3.5); //cnmbc
-		estatica.scale.y = 3.5;
-		estatica.scale.x = 3.5;
+		//estatica.scale.set(3.5, 3.5); //cnmbc
 		estatica.animation.play('idle');
-		estatica.screenCenter(XY);
+		//estatica.screenCenter(XY);
 		estatica.antialiasing = false;
 		estatica.color = FlxColor.RED;
 		estatica.alpha = 0.7;
@@ -440,6 +438,8 @@ class MainMenuState extends MusicBeatState {
 	var fullTimer:Float = 0;
 	override function update(elapsed:Float) {
 		fullTimer += elapsed;
+		estatica.scale.y = 3.5;
+		estatica.scale.x = 3.5;
 
 		if (FlxG.sound.music.volume < 0.8 && !selectedSomethin)
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;

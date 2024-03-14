@@ -1923,10 +1923,10 @@ class PlayState extends MusicBeatState
 					var scaryfloor:BGSprite = new BGSprite('mario/LuigiBeta/FrontBG', -1200, -850);
 					scaryfloor.antialiasing = ClientPrefs.globalAntialiasing;
 					scaryfloor.scale.x = 2.0;
-					scaryfloor.scale.y = 2.0
+					scaryfloor.scale.y = 2.0;
 					add(scaryfloor);
 
-					starmanGF = new BGSprite('characters/Beta_Luigi_GF_Assets', 570, 100, 1, 1, ["GFIdle"], false);
+					starmanGF = new BGSprite('characters/Beta_Luigi_GF_Assets', 570, 100, 2, 2, ["GFIdle"], false);
 					starmanGF.animation.addByIndices('danceRight', 'GFIdle', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], "", 24, false);
 					starmanGF.animation.addByIndices('danceLeft', 'GFIdle', [30,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], "", 24, false);
 					starmanGF.animation.addByPrefix('sad', "GFMiss", 24, false);
