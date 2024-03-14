@@ -1,110 +1,110 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				-4,
 				30
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "BFIdle"
+			"fps": 24,
+			"name": "BFIdle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				15,
 				30
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "BFLeft0"
+			"fps": 24,
+			"name": "BFLeft0",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-32,
 				52
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "BFUp0"
+			"fps": 24,
+			"name": "BFUp0",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-58,
 				31
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "BFRight0"
+			"fps": 24,
+			"name": "BFRight0",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-9,
 				2
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "BFDown0"
+			"fps": 24,
+			"name": "BFDown0",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				15,
 				31
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFTmiss",
-			"indices": [],
-			"name": "BFLeftMiss"
+			"fps": 24,
+			"name": "BFLeftMiss",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-7,
 				6
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "BFDownMiss"
+			"fps": 24,
+			"name": "BFDownMiss",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-31,
 				54
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUPmiss",
-			"indices": [],
-			"name": "BFUpMiss"
+			"fps": 24,
+			"name": "BFUpMiss",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-55,
 				35
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHTmiss",
-			"indices": [],
-			"name": "BFRightMiss"
+			"fps": 24,
+			"name": "BFRightMiss",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/MM_Boyfriend_Alone_Assetsa",
 	"position": [
-		0,
-		240
+		120,
+		350
 	],
 	"healthicon": "bfghost",
 	"flip_x": true,
@@ -114,9 +114,9 @@
 		254
 	],
 	"camera_position": [
-		0,
-		0
+		120,
+		-110
 	],
 	"sing_duration": 4,
-	"scale": 1
+	"scale": 2
 }

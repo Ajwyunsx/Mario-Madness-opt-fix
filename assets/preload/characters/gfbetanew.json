@@ -1,13 +1,14 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				-9
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "danceLeft",
+			"fps": 24,
+			"name": "GFIdle",
 			"indices": [
 				30,
 				0,
@@ -25,17 +26,17 @@
 				12,
 				13,
 				14
-			],
-			"name": "GFIdle"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				-9
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "danceRight",
+			"fps": 24,
+			"name": "GFIdle",
 			"indices": [
 				15,
 				16,
@@ -52,17 +53,17 @@
 				27,
 				28,
 				29
-			],
-			"name": "GFIdle"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-24,
 				-9
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "sad",
+			"fps": 24,
+			"name": "GFMiss",
 			"indices": [
 				0,
 				1,
@@ -77,15 +78,14 @@
 				10,
 				11,
 				12
-			],
-			"name": "GFMiss"
+			]
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/Beta_Luigi_GF_Assets",
 	"position": [
-		170,
-		0
+		300,
+		140
 	],
 	"healthicon": "gf",
 	"flip_x": false,
@@ -95,9 +95,9 @@
 		77
 	],
 	"camera_position": [
-		0,
-		0
+		-140,
+		-140
 	],
 	"sing_duration": 4,
-	"scale": 1
+	"scale": 2
 }
