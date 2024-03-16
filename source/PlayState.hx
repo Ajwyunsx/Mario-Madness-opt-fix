@@ -1902,6 +1902,7 @@ class PlayState extends MusicBeatState
 					noHUD = true;
 					specialGameOver = true;
 					
+					add(gfGroup);
 
 					starmanGF = new BGSprite('characters/Beta_Luigi_GF_Assets', 570, 100, 2, 2, ["GFIdle"], false);
 					starmanGF.animation.addByIndices('danceRight', 'GFIdle', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], "", 24, false);
