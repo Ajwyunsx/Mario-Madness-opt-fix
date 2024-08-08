@@ -50,8 +50,6 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib git lime https://github.com/mcagabe19-stuff/lime
-          haxelib git hxcpp https://github.com/mcagabe19-stuff/hxcpp
           haxelib install openfl 9.2.0
           haxelib --never install flixel 5.3.1
           haxelib install flixel-tools
@@ -60,6 +58,8 @@ jobs:
           haxelib install tjson
           haxelib install hxjsonast
           haxelib install hscript
+          haxelib git lime https://github.com/mcagabe19-stuff/lime
+          haxelib git hxcpp https://github.com/mcagabe19-stuff/hxcpp
           haxelib git hxCodec https://github.com/tchcfhvgd/hxCodec-1
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install extension-androidtools
